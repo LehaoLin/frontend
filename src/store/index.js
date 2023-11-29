@@ -1,9 +1,13 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { io } from "socket.io-client";
 
 export const useStore = defineStore("store", {
   state: () => {
-    return { count: 0 };
+    return {
+      count: 0,
+      socket: io(),
+    };
   },
   getters: {
     doubleCount(state) {
@@ -26,6 +30,9 @@ export const useStore = defineStore("store", {
         responseType: "json",
         data: {},
       });
+    },
+    send_msg() {
+      this.socket.emit("chat", { test: 1 });
     },
   },
 });
