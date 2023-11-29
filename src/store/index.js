@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import axios from "axios";
 
 export const useStore = defineStore("store", {
   state: () => {
@@ -12,6 +13,19 @@ export const useStore = defineStore("store", {
   actions: {
     increment() {
       this.count++;
+    },
+    async post() {
+      let res = await axios({
+        method: "post",
+        url: "/",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any other headers required by the API
+        },
+        responseType: "json",
+        data: {},
+      });
     },
   },
 });
